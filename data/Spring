@@ -1,31 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>web-developer</title>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <h1><a href="index.html">Developer</a></h1>
-    <ol>
-      <li><a href="React.html">REACT</a></li>
-      <li><a href="Spring.html">SPRING</a></li>
-      <li><a href="Node.html">Node</a></li>
-    </ol>
-
-    <h2>Spring</h2>
-
-    <strong
+<strong
       ><a href="https://spring.io/projects/spring-boot"
         >Spring Boot makes it easy to create stand-alone, production-grade
         Spring based Applications that you can <u>"just run".</u></a
       ></strong
     >
-    We take an opinionated view of the Spring platform and third-party libraries
+    222We take an opinionated view of the Spring platform and third-party libraries
     so you can get started with minimum fuss. Most Spring Boot applications need
     minimal Spring configuration. If you’re looking for information about a
     specific version, or instructions about how to upgrade from an earlier
     release, check out the project release notes section on our wiki.
-    <img src="coding.jpg" width="95%" />
+
     <h3 style="margin-top: 55px">Features</h3>
     <p>Create stand-alone Spring applications</p>
     <p>
@@ -57,5 +41,3 @@
     <p>Test Driven Development with Spring Boot</p>
     <p>From Zero to Hero with Spring Boot 2.0</p>
     <br />You can also join the Spring Boot community on Gitter!
-  </body>
-</html>

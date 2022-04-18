@@ -1,24 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>web-developer</title>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <h1><a href="index.html">Developer</a></h1>
-    <ol>
-      <li><a href="React.html">REACT</a></li>
-      <li><a href="Spring.html">SPRING</a></li>
-      <li><a href="Node.html">Node</a></li>
-    </ol>
-
-    <h2>React</h2>
-
-    <strong><a href="https://ko.reactjs.org/">React는</a></strong>
-    상호작용이 많은 UI를 만들 때 생기는 어려움을 줄여줍니다. 애플리케이션의 각
+<strong><a href="https://ko.reactjs.org/">React는</a></strong>
+    222상호작용이 많은 UI를 만들 때 생기는 어려움을 줄여줍니다. 애플리케이션의 각
     상태에 대한 간단한 뷰만 설계하세요. 그럼 React는 데이터가 변경됨에 따라
     적절한 컴포넌트만 효율적으로 갱신하고 렌더링합니다.
-    <img src="coding.jpg" width="95%" />
+  
     <h3 style="margin-top: 55px">Features</h3>
     <p>
       스스로 상태를 관리하는 캡슐화된 컴포넌트를 만드세요. 그리고 이를 조합해
@@ -29,5 +13,3 @@
       형식의 데이터를 앱 안에서 손쉽게 전달할 수 있고, DOM과는 별개로 상태를
       관리할 수 있습니다.
     </p>
-  </body>
-</html>
