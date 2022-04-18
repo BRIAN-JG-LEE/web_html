@@ -1,6 +1,6 @@
 function sum(first, second) {
   //parameter 매개변수
-  console.log(first + second);
+  return first + second;
 }
 
-sum(4, 11); //argument 인자(입력값)
+console.log(sum(4, 8)); //argument 인자(입력값)
