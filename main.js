@@ -9,9 +9,18 @@ var app = http.createServer(function (request, response) {
 
   if (pathname === "/") {
     if (queryData.id === undefined) {
-      fs.readFile(`data/${queryData.id}`, "utf-8", (err, description) => {
+      fs.readdir("./data", function (error, filelist) {
         var title = "Welcome! developer!";
         var description = "Hello REACT, SPRING, Node";
+        var list = "<ul>";
+        var i = 0;
+        while (i < filelist.length) {
+          list =
+            list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+          i = i + 1;
+        }
+        list = list + "</ul>";
+
         var template = `
           <!DOCTYPE html>
           <html>
@@ -21,11 +30,7 @@ var app = http.createServer(function (request, response) {
             </head>
             <body>
               <h1><a href="/">Developer</a></h1>
-              <ul>
-                <li><a href="/?id=REACT">REACT</a></li>
-                <li><a href="/?id=SPRING">SPRING</a></li>
-                <li><a href="/?id=Node">Node.js</a></li>
-              </ul>
+              ${list}
               <h2>${title}</h2>
               <p>
                 ${description}
@@ -37,9 +42,20 @@ var app = http.createServer(function (request, response) {
         response.end(template);
       });
     } else {
-      fs.readFile(`data/${queryData.id}`, "utf-8", (err, description) => {
-        var title = queryData.id;
-        var template = `
+      fs.readdir("./data", function (error, filelist) {
+        var title = "Welcome! developer!";
+        var description = "Hello REACT, SPRING, Node";
+        var list = "<ul>";
+        var i = 0;
+        while (i < filelist.length) {
+          list =
+            list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+          i = i + 1;
+        }
+        list = list + "</ul>";
+        fs.readFile(`data/${queryData.id}`, "utf-8", (err, description) => {
+          var title = queryData.id;
+          var template = `
         <!DOCTYPE html>
         <html>
           <head>
@@ -48,11 +64,7 @@ var app = http.createServer(function (request, response) {
           </head>
           <body>
             <h1><a href="/">Developer</a></h1>
-            <ul>
-              <li><a href="/?id=REACT">REACT</a></li>
-              <li><a href="/?id=SPRING">SPRING</a></li>
-              <li><a href="/?id=Node">Node.js</a></li>
-            </ul>
+            ${list}
             <h2>${title}</h2>
             <p>
               ${description}
@@ -60,8 +72,9 @@ var app = http.createServer(function (request, response) {
           </body>
         </html>
       `;
-        response.writeHead(200);
-        response.end(template);
+          response.writeHead(200);
+          response.end(template);
+        });
       });
     }
   } else {
