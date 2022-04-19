@@ -1,6 +1,7 @@
 var http = require("http");
 var fs = require("fs");
 var url = require("url");
+const path = require("path");
 
 function templateHTML(title, list, body) {
   return `
@@ -11,8 +12,9 @@ function templateHTML(title, list, body) {
       <meta charset="utf-8" />
     </head>
     <body>
-      <h1><a href="/">Developer</a></h1>
+      <h1><a href="/">Developer's page</a></h1>
       ${list}
+      <a href="/create">create cont</a>
       ${body}
     </body>
   </html>
@@ -70,6 +72,24 @@ var app = http.createServer(function (request, response) {
         });
       });
     }
+  } else if (pathname === "/create") {
+    fs.readdir("./data", function (error, filelist) {
+      var title = "developer's create";
+      var list = templateList(filelist);
+      var template = templateHTML(
+        title,
+        list,
+        `
+        <form action="http://localhost:3000/process_create" method="post">
+          <p><input type="text" name="title" placeholder="타이틀을 입력하세요"/></p>
+          <p><textarea name="description" placeholder="내용을 입력하세요"></textarea></p>
+          <p><input type="submit" value="이걸 누르면 서버로 전송" /></p>
+        </form>
+        `
+      );
+      response.writeHead(200);
+      response.end(template);
+    });
   } else {
     response.writeHead(404);
     response.end("Not found page");
