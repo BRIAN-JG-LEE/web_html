@@ -1,6 +1,8 @@
 var http = require("http");
 var fs = require("fs");
 var url = require("url");
+var qs = require("querystring");
+
 const path = require("path");
 
 function templateHTML(title, list, body) {
@@ -80,7 +82,7 @@ var app = http.createServer(function (request, response) {
         title,
         list,
         `
-        <form action="http://localhost:3000/process_create" method="post">
+        <form action="http://localhost:3000/create_process" method="post">
           <p><input type="text" name="title" placeholder="타이틀을 입력하세요"/></p>
           <p><textarea name="description" placeholder="내용을 입력하세요"></textarea></p>
           <p><input type="submit" value="이걸 누르면 서버로 전송" /></p>
@@ -90,6 +92,24 @@ var app = http.createServer(function (request, response) {
       response.writeHead(200);
       response.end(template);
     });
+  } else if (pathname === "/create_process") {
+    var body = "";
+
+    request.on("data", function (data) {
+      body = body + data;
+    });
+
+    request.on("end", function () {
+      var post = qs.parse(body);
+      var title = post.title;
+      var description = post.description;
+      console.log(post);
+      console.log(post.title);
+      console.log(post.description);
+    });
+
+    response.writeHead(200);
+    response.end("success!");
   } else {
     response.writeHead(404);
     response.end("Not found page");
