@@ -106,10 +106,11 @@ var app = http.createServer(function (request, response) {
       console.log(post);
       console.log(post.title);
       console.log(post.description);
+      fs.writeFile(`data/${title}`, description, "utf8", function (err) {
+        response.writeHead(302, { Location: `/?id=${title}` });
+        response.end("success!");
+      });
     });
-
-    response.writeHead(200);
-    response.end("success!");
   } else {
     response.writeHead(404);
     response.end("Not found page");
