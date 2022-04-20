@@ -5,7 +5,7 @@ var qs = require("querystring");
 
 const path = require("path");
 
-function templateHTML(title, list, body) {
+function templateHTML(title, list, body, control) {
   return `
   <!DOCTYPE html>
   <html>
@@ -16,7 +16,7 @@ function templateHTML(title, list, body) {
     <body>
       <h1><a href="/">Developer's page</a></h1>
       ${list}
-      <a href="/create">create cont</a>
+      ${control}
       ${body}
     </body>
   </html>
@@ -51,7 +51,8 @@ var app = http.createServer(function (request, response) {
           `<h2>${title}</h2>
         <p>
           ${description}
-        </p>`
+        </p>`,
+          `<a href="/create">create cont</a>`
         );
         response.writeHead(200);
         response.end(template);
@@ -67,7 +68,8 @@ var app = http.createServer(function (request, response) {
             `<h2>${title}</h2>
           <p>
             ${description}
-          </p>`
+          </p>`,
+            `<a href="/create">create cont</a> <a href="/update?id=${title}">update cont</a>`
           );
           response.writeHead(200);
           response.end(template);
@@ -84,10 +86,11 @@ var app = http.createServer(function (request, response) {
         `
         <form action="http://localhost:3000/create_process" method="post">
           <p><input type="text" name="title" placeholder="타이틀을 입력하세요"/></p>
-          <p><textarea name="description" placeholder="내용을 입력하세요"></textarea></p>
-          <p><input type="submit" value="이걸 누르면 서버로 전송" /></p>
+          <p><textarea name="description" placeholder="내용을 입력하세요" cols="23" rows="10"></textarea></p>
+          <p><input type="submit" value="이걸 누르면 데이터 생성" /></p>
         </form>
-        `
+        `,
+        ""
       );
       response.writeHead(200);
       response.end(template);
@@ -109,6 +112,28 @@ var app = http.createServer(function (request, response) {
       fs.writeFile(`data/${title}`, description, "utf8", function (err) {
         response.writeHead(302, { Location: `/?id=${title}` });
         response.end("success!");
+      });
+    });
+  } else if (pathname === "/update") {
+    fs.readdir("./data", function (error, filelist) {
+      fs.readFile(`data/${queryData.id}`, "utf-8", (err, description) => {
+        var title = queryData.id;
+        var list = templateList(filelist);
+        var template = templateHTML(
+          title,
+          list,
+          `
+          <form action="http://localhost:3000/update_process" method="post">
+            <input type="hidden" name="id" value="${title}"/>
+            <p><input type="text" name="title" placeholder="타이틀을 입력하세요" value="${title}"/></p>
+            <p><textarea name="description" placeholder="내용을 입력하세요" cols="23" rows="10">${description}</textarea></p>
+            <p><input type="submit" value="이걸 누르면 업데이트" /></p>
+          </form>
+          `,
+          `<a href="/create">create cont</a> <a href="/update?id=${title}">update cont</a>`
+        );
+        response.writeHead(200);
+        response.end(template);
       });
     });
   } else {
