@@ -107,8 +107,6 @@ var app = http.createServer(function (request, response) {
       var title = post.title;
       var description = post.description;
       console.log(post);
-      console.log(post.title);
-      console.log(post.description);
       fs.writeFile(`data/${title}`, description, "utf8", function (err) {
         response.writeHead(302, { Location: `/?id=${title}` });
         response.end("success!");
@@ -134,6 +132,25 @@ var app = http.createServer(function (request, response) {
         );
         response.writeHead(200);
         response.end(template);
+      });
+    });
+  } else if (pathname === "/update_process") {
+    var body = "";
+
+    request.on("data", function (data) {
+      body = body + data;
+    });
+
+    request.on("end", function () {
+      var post = qs.parse(body);
+      var id = post.id;
+      var title = post.title;
+      var description = post.description;
+      fs.rename(`data/${id}`, `data/${title}`, function (err) {
+        fs.writeFile(`data/${title}`, description, "utf8", function (err) {
+          response.writeHead(302, { Location: `/?id=${title}` });
+          response.end("success!");
+        });
       });
     });
   } else {
