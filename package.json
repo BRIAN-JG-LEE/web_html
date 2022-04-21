@@ -1,5 +1,26 @@
 {
   "dependencies": {
+    "sanitize-html": "^2.7.0",
     "uuid": "^8.3.2"
-  }
+  },
+  "name": "everyday_week1",
+  "version": "1.0.0",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BRIAN-JG-LEE/web_html.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BRIAN-JG-LEE/web_html/issues"
+  },
+  "homepage": "https://github.com/BRIAN-JG-LEE/web_html#readme",
+  "description": ""
 }
